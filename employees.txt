@@ -3,3 +3,5 @@
 103 CBrown HR 55000.0
 104 TCook IT 95000.0
 105 JWhite Sales 70000.0
+106 Emp1 Accounting 56000.0
+107 Emp2 Sales 80000.0

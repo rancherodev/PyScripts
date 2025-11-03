@@ -2,15 +2,14 @@
 # Name: Aaron Moreno
 # Date: 10/05/2025
 # Description:
-# This program manages a company’s employee directory. It reads employee data from a file,
-# allows adding and deleting employees, converts the data into a dictionary,
-# and writes updates back to the file.
+# This program manages a fake company’s employee directory. It reads the employee data from a file in the same folder,
+# that allows adding and deleting of employees, converts the data into a dictionary,
+# and finally writes updates back to the file.
 
 # --------------------------------------------
 # Employee Class
 # --------------------------------------------
 class Employee:
-    """Employee class to keep track of employee info"""
 
     def __init__(self, ID=-999, name='', department='', pay=0.0):
         self.set_ID(ID)
@@ -46,23 +45,20 @@ class Employee:
         return f"{self.get_ID()} {self.get_name()} {self.get_department()} {self.get_pay()}"
 
 
-# --------------------------------------------
 # Employee Directory Class
-# --------------------------------------------
 class EmployeeDirectory:
-    """Track employee info in the directory"""
 
     def __init__(self):
         self.employee_list = []
         self.employee_dict = {}
 
     def add_employee(self, employee):
-        """Add employee only if ID not already in list"""
+        """Adds employee only if ID is not already in list"""
         if not any(emp.get_ID() == employee.get_ID() for emp in self.employee_list):
             self.employee_list.append(employee)
 
     def del_employee(self, employee):
-        """Delete employee by ID"""
+        """Deletes employee by ID"""
         for emp in self.employee_list:
             if emp.get_ID() == employee.get_ID():
                 self.employee_list.remove(emp)
@@ -70,7 +66,7 @@ class EmployeeDirectory:
         print(f"ID:{employee.get_ID()} does not exist, deletion is aborted")
 
     def read_file(self, file_name):
-        """Read employees.txt file and return a list of Employee objects"""
+        """commit to git so it can actually Read employees.txt file and return a list of Employee objects if you don't commit it it never reads the employees.txt file"""
         employees = []
         try:
             with open(file_name, "r") as f:
@@ -87,7 +83,7 @@ class EmployeeDirectory:
         return employees
 
     def update_employee_dir(self, file_name):
-        """Read file and remove duplicates automatically"""
+        """Reads file and remove duplicates automatically I was having some real problems with duplicating employees had 25 at one point"""
         employees = self.read_file(file_name)
         unique_ids = set()
         self.employee_list = []
@@ -97,13 +93,13 @@ class EmployeeDirectory:
                 unique_ids.add(emp.get_ID())
 
     def write_to_file(self, file_name):
-        """Write the updated employee list back to file"""
+        """Write the updated employee list back to file so it saves any new employees"""
         with open(file_name, "w") as f:
             for emp in self.employee_list:
                 f.write(str(emp) + "\n")
 
     def write_to_dict(self):
-        """Convert the employee list to a dictionary"""
+        """Converts the employee list to a dictionary"""
         self.employee_dict = {'ID': [], 'name': [], 'department': [], 'pay': []}
         for emp in self.employee_list:
             self.employee_dict['ID'].append(emp.get_ID())
@@ -112,7 +108,7 @@ class EmployeeDirectory:
             self.employee_dict['pay'].append(emp.get_pay())
 
     def display_dict(self):
-        """Display the employee dictionary in assignment format"""
+        """Display the employee dictionary as the given assignment format"""
         print("--- Employee Directory Output ---")
         for key, value in self.employee_dict.items():
             print(f"{key} : {value}")
@@ -132,7 +128,7 @@ if __name__ == "__main__":
         emp2 = Employee(107, 'Emp2', 'Sales', 80000.0)
         emp3 = Employee(108, 'Emp3', 'Marketing', 90000.0)
 
-        # Add emp1 and emp2 safely (duplicates prevented)
+        # Add emp1 and emp2 safely 
         emp_dir.add_employee(emp1)
         emp_dir.add_employee(emp2)
 
